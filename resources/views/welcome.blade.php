@@ -45,9 +45,9 @@
 <body>
     <div class="login-container">
         <h2>Login</h2>
-        <button class="login-button" >Login as User</button>
-        <button class="login-button" >Login as Admin</button>
-        <button class="login-button" >Login as Petugas</button>
+        <a class="login-button" href="{{route('formlogin_user')}}">Login as User</a>
+        <a class="login-button" href="">Login as Admin</a>
+        <a class="login-button" href="">Login as Petugas</a>
     </div>
 
 </body>

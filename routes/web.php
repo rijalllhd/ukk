@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,8 +20,10 @@ Route::get('/', function () {
 
 
 Route::prefix('user')->group(function(){
-    
-
+    Route::get('/dashboard',[UserController::class, 'dashboard'])->name('dashboard.user')->middleware('auth');
+    Route::get('/login',[UserController::class, 'login'])->name('formlogin_user');
+    Route::post('/login/proses',[UserController::class, 'login_proses'])->name('login.proses.user');
+    Route::get('/logout',[UserController::class, 'logout'])->name('logout.user');
 });
 
 
