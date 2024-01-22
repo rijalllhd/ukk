@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PetugasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,13 +30,19 @@ Route::prefix('user')->group(function(){
 
 
 Route::prefix('admin')->group(function(){
-
+    Route::get('/dashboard',[AdminController::class, 'dashboard'])->name('dashboard.admin')->middleware('admin');
+    Route::get('/login',[AdminController::class, 'login'])->name('formlogin_admin');
+    Route::post('/login/proses',[AdminController::class, 'login_proses'])->name('login.proses.admin');
+    Route::get('/logout',[AdminController::class, 'logout'])->name('logout.admin');
     
 });
 
 
 
 Route::prefix('petugas')->group(function(){
-
+    Route::get('/dashboard',[PetugasController::class, 'dashboard'])->name('dashboard.petugas')->middleware('petugas');
+    Route::get('/login',[PetugasController::class, 'login'])->name('formlogin_petugas');
+    Route::post('/login/proses',[PetugasController::class, 'login_proses'])->name('login.proses.petugas');
+    Route::get('/logout',[PetugasController::class, 'logout'])->name('logout.petugas');
     
 });

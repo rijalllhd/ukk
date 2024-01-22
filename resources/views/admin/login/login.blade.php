@@ -12,7 +12,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>Login User</title>
+    <title>Login Admin</title>
     <!-- CSS files -->
     <link href="./dist/css/tabler.min.css?1684106062" rel="stylesheet"/>
     <link href="./dist/css/tabler-flags.min.css?1684106062" rel="stylesheet"/>
@@ -39,11 +39,11 @@
         <div class="card card-md">
           <div class="card-body">
             <h2 class="h2 text-center mb-4">Login to your account</h2>
-            <form action="{{route('login.proses.user')}}" method="post" autocomplete="off" novalidate>
+            <form action="{{route('login.proses.admin')}}" method="post" autocomplete="off" novalidate>
                 @csrf
               <div class="mb-3">
-                <label class="form-label">Email address</label>
-                <input type="email" name="email" class="form-control" placeholder="your@email.com" autocomplete="off">
+                <label class="form-label">Username</label>
+                <input type="text" name="username" class="form-control" placeholder="admin" autocomplete="off">
               </div>
               <div class="mb-2">
                 <label class="form-label">

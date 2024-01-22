@@ -46,8 +46,8 @@
     <div class="login-container">
         <h2>Login</h2>
         <a class="login-button" href="{{route('formlogin_user')}}">Login as User</a>
-        <a class="login-button" href="">Login as Admin</a>
-        <a class="login-button" href="">Login as Petugas</a>
+        <a class="login-button" href="{{route('formlogin_admin')}}">Login as Admin</a>
+        <a class="login-button" href="{{route('formlogin_petugas')}}">Login as Petugas</a>
     </div>
 
 </body>
