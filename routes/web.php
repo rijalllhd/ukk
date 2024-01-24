@@ -38,6 +38,9 @@ Route::prefix('admin')->group(function(){
     Route::post('/login/proses',[AdminController::class, 'login_proses'])->name('login.proses.admin');
     Route::get('/logout',[AdminController::class, 'logout'])->name('logout.admin');
 
+    //make petugas(crud petugas)
+    Route::resource('petugas', PetugasController::class);
+
     
 });
 

@@ -1,5 +1,10 @@
 @extends('admin.layout')
 
+@section('title')
+    <h3>Dashboard</h3>
+@endsection
+
+
 @section('content')
 
     <section class="row">
