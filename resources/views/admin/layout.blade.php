@@ -81,7 +81,7 @@
                             class="sidebar-item  has-sub">
                             <a href="#" class='sidebar-link'>
                                 <i class="bi bi-stack"></i>
-                                <span>Components</span>
+                                <span>Master Data</span>
                             </a>
                             
                             <ul class="submenu ">

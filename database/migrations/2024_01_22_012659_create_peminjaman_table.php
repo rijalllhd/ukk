@@ -24,6 +24,7 @@ return new class extends Migration
          // Insert a new pemminjaman
        DB::table('peminjaman')->insert([
         'user_id' => '1',
+        'petugas_id' => '1',
         'buku_id' => '1',
         'tanggal_peminjaman' => '2024-1-14',
         'tanggal_kembali' => '2024-1-31',
