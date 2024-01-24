@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer('user_id');
             $table->integer('petugas_id');
             $table->integer('buku_id');
+            $table->string('kode_peminjaman')->unique();
             $table->date('tanggal_peminjaman');
             $table->date('tanggal_kembali');
             $table->enum('status', ['P','S','B']);
@@ -27,6 +28,7 @@ return new class extends Migration
         'user_id' => '1',
         'petugas_id' => '1',
         'buku_id' => '1',
+        'kode_peminjaman' => 'TDR-400',
         'tanggal_peminjaman' => '2024-1-14',
         'tanggal_kembali' => '2024-1-31',
         'status' => 'B',
