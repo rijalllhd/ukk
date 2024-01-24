@@ -14,11 +14,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>Login User</title>
     <!-- CSS files -->
-    <link href="./dist/css/tabler.min.css?1684106062" rel="stylesheet"/>
-    <link href="./dist/css/tabler-flags.min.css?1684106062" rel="stylesheet"/>
-    <link href="./dist/css/tabler-payments.min.css?1684106062" rel="stylesheet"/>
-    <link href="./dist/css/tabler-vendors.min.css?1684106062" rel="stylesheet"/>
-    <link href="./dist/css/demo.min.css?1684106062" rel="stylesheet"/>
+    <link href="{{asset('asset/user/dist/css/tabler.min.css?1684106062')}}" rel="stylesheet"/>
+    <link href="{{asset('asset/user/dist/css/tabler-flags.min.css?1684106062')}}" rel="stylesheet"/>
+    <link href="{{asset('asset/user/dist/css/tabler-payments.min.css?1684106062')}}" rel="stylesheet"/>
+    <link href="{{asset('asset/user/dist/css/tabler-vendors.min.css?1684106062')}}" rel="stylesheet"/>
+    <link href="{{asset('asset/user/dist/css/demo.min.css?1684106062')}}" rel="stylesheet"/>
     <style>
       @import url('https://rsms.me/inter/inter.css');
       :root {
@@ -30,7 +30,7 @@
     </style>
   </head>
   <body  class=" d-flex flex-column">
-    <script src="./dist/js/demo-theme.min.js?1684106062"></script>
+    <script src="{{asset('asset/user/dist/js/demo-theme.min.js?1684106062')}}"></script>
     <div class="page page-center">
       <div class="container container-tight py-4">
         <div class="text-center mb-4">
@@ -77,7 +77,7 @@
     </div>
     <!-- Libs JS -->
     <!-- Tabler Core -->
-    <script src="./dist/js/tabler.min.js?1684106062" defer></script>
-    <script src="./dist/js/demo.min.js?1684106062" defer></script>
+    <script src="{{asset('asset/user/dist/js/tabler.min.js?1684106062')}}" defer></script>
+    <script src="{{asset('asset/user/dist/js/demo.min.js?1684106062')}}" defer></script>
   </body>
 </html>
