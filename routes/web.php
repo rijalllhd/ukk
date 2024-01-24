@@ -22,10 +22,13 @@ Route::get('/', function () {
 
 
 Route::prefix('user')->group(function(){
+    // authenticate
     Route::get('/dashboard',[UserController::class, 'dashboard'])->name('dashboard.user')->middleware('auth');
     Route::get('/login',[UserController::class, 'login'])->name('formlogin_user');
     Route::post('/login/proses',[UserController::class, 'login_proses'])->name('login.proses.user');
     Route::get('/logout',[UserController::class, 'logout'])->name('logout.user');
+    Route::get('/register',[UserController::class, 'register'])->name('formregister_user');
+    Route::post('/register/proses',[UserController::class, 'register_proses'])->name('register.proses.user');
 });
 
 
@@ -34,6 +37,7 @@ Route::prefix('admin')->group(function(){
     Route::get('/login',[AdminController::class, 'login'])->name('formlogin_admin');
     Route::post('/login/proses',[AdminController::class, 'login_proses'])->name('login.proses.admin');
     Route::get('/logout',[AdminController::class, 'logout'])->name('logout.admin');
+
     
 });
 

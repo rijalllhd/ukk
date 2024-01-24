@@ -68,7 +68,7 @@
           </div>
         </div>
         <div class="text-center text-muted mt-3">
-          Don't have account yet? <a href="./sign-up.html" tabindex="-1">Sign up</a>
+          Don't have account yet? <a href="{{route('formregister_user')}}" tabindex="-1">Sign up</a>
         </div>
         <div class="text-center text-muted mt-3">
           Back to <a href="{{url('/')}}" tabindex="-1">Landing Page</a>
