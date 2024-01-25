@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Models\Petugas;
 use Carbon\carbon;
+use Illuminate\Support\Facades\Hash;
 
 class PetugasController extends Controller
 {
@@ -59,7 +60,42 @@ class PetugasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+        $request->validate([
+            'username'=>'required',
+            'email'=>'required|email|unique:petugas,email',
+            'password'=>'required|min:8',
+            'nama_lengkap'=>'required',
+            'alamat'=>'required',
+        ],[
+            'username.required'=>'Username Wajib Diisi',
+            'email.required'=>'Email Wajib Diisi',
+            'email.unique'=>'Email Sudah Terdaftar',
+            'password.required'=>'Password Wajib Diisi',
+            'password.min'=>'Password Minimal 8 Karakter',
+            'nama_lengkap.required'=>'Nama Lengkap Wajib Diisi',
+            'alamat.required'=>'Alamat Wajib Diisi',
+        ]);
+
+        // Cek apakah petugas sudah ada?
+        $data = Petugas::where('email', $request->email)->first();
+        if ($data) {
+            return redirect()->route('petugas.index');
+        }
+
+        $petugas = [
+            'username' => $request->input('username'),
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password')),
+            'alamat' => $request->input('alamat'),
+            'nama_lengkap' => $request->input('nama_lengkap'),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ];
+
+        Petugas::insert($petugas);
+
+        return redirect()->route('petugas.index');
     }
 
     /**
@@ -83,7 +119,41 @@ class PetugasController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // dd($request->all());
+        $request->validate([
+            'username'=>'required',
+            'email'=>'required|email|unique:petugas,email',
+            'password'=>'required|min:8',
+            'nama_lengkap'=>'required',
+            'alamat'=>'required',
+        ],[
+            'username.required'=>'Username Wajib Diisi',
+            'email.required'=>'Email Wajib Diisi',
+            'email.unique'=>'Email Sudah Terdaftar',
+            'password.required'=>'Password Wajib Diisi',
+            'password.min'=>'Password Minimal 8 Karakter',
+            'nama_lengkap.required'=>'Nama Lengkap Wajib Diisi',
+            'alamat.required'=>'Alamat Wajib Diisi',
+        ]);
+
+        // Cek apakah petugas sudah ada?
+        $data = Petugas::where('email', $request->email)->first();
+        if ($data) {
+            return redirect()->route('petugas.index');
+        }
+
+        $petugas = [
+            'username' => $request->input('username'),
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password')),
+            'alamat' => $request->input('alamat'),
+            'nama_lengkap' => $request->input('nama_lengkap'),
+            'updated_at' => Carbon::now(),
+        ];
+
+        Petugas::where('id', $id)->update($petugas);
+
+        return redirect()->route('petugas.index');
     }
 
     /**
@@ -91,6 +161,7 @@ class PetugasController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Petugas::where('id', $id)->delete();
+        return redirect()->route('petugas.index');
     }
 }
