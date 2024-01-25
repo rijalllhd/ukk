@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('penulis');
             $table->string('penerbit');
             $table->integer('tahun_terbit');
+            $table->integer('jumlah_buku');
             $table->timestamps();
         });
 
@@ -26,6 +27,7 @@ return new class extends Migration
            'penulis' => 'siba shakib',
            'penerbit' => 'cv karya',
            'tahun_terbit' => '2024',
+           'jumlah_buku' => '5',
            'created_at' => now(),
            'updated_at' => now(),
        ]);
