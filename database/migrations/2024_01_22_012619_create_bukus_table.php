@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('penerbit');
             $table->integer('tahun_terbit');
             $table->integer('jumlah_buku');
+            $table->string('cover');
             $table->timestamps();
         });
 
@@ -28,6 +29,7 @@ return new class extends Migration
            'penerbit' => 'cv karya',
            'tahun_terbit' => '2024',
            'jumlah_buku' => '5',
+           'cover' => 'sds.jpg',
            'created_at' => now(),
            'updated_at' => now(),
        ]);
