@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('judul');
             $table->string('penulis');
             $table->string('penerbit');
+            $table->string('sinopsis');
             $table->integer('tahun_terbit');
             $table->integer('jumlah_buku');
             $table->string('cover');
@@ -27,6 +28,7 @@ return new class extends Migration
            'judul' => 'samira dan samir',
            'penulis' => 'siba shakib',
            'penerbit' => 'cv karya',
+           'sinopsis' => 'mengisahka kisah cinta dan perjuangan seorang putra perempuan pak komandan di afganistan',
            'tahun_terbit' => '2024',
            'jumlah_buku' => '5',
            'cover' => 'sds.jpg',

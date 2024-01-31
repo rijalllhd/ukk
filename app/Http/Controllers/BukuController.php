@@ -41,6 +41,7 @@ class BukuController extends Controller
             'judul' => 'required',
             'penulis' => 'required',
             'penerbit' => 'required',
+            'sinopsis' => 'required',
             'tahun_terbit' => 'required|integer',
             'jumlah_buku' => 'required|integer',
             'cover' => 'required',
@@ -51,6 +52,7 @@ class BukuController extends Controller
             'judul' => $request->input('judul'),
             'penulis' => $request->input('penulis'),
             'penerbit' => $request->input('penerbit'),
+            'sinopsis' => $request->input('sinopsis'),
             'tahun_terbit' => $request->input('tahun_terbit'),
             'jumlah_buku' => $request->input('jumlah_buku'),
             'cover' => $request->input('cover'),
@@ -68,6 +70,12 @@ class BukuController extends Controller
             'buku_id' => 'required',
             'kategori_id' => 'required',
         ]);
+
+        // Cek apakah relasi sudah ada?
+        $data = Kategori_buku_relasi::where('kategori_id', $request->kategori_id)->first();
+        if ($data) {
+            return redirect()->route('buku.index');
+        }
 
         $kategori_buku_relasi = [
             'buku_id' => $request->input('buku_id'),
@@ -114,6 +122,7 @@ class BukuController extends Controller
             'judul' => 'required',
             'penulis' => 'required',
             'penerbit' => 'required',
+            'sinopsis' => 'required',
             'tahun_terbit' => 'required|integer',
             'jumlah_buku' => 'required|integer',
             'cover' => 'required',
@@ -124,6 +133,7 @@ class BukuController extends Controller
             'judul' => $request->input('judul'),
             'penulis' => $request->input('penulis'),
             'penerbit' => $request->input('penerbit'),
+            'sinopsis' => $request->input('sinopsis'),
             'tahun_terbit' => $request->input('tahun_terbit'),
             'jumlah_buku' => $request->input('jumlah_buku'),
             'cover' => $request->input('cover'),
