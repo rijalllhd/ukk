@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\BukuController;
+use App\Http\Controllers\KategoriController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +48,9 @@ Route::prefix('admin')->group(function(){
     Route::post('buku/kategori', [BukuController::class, 'kategori_add'])->name('buku.kategori.add');
     Route::delete('buku/kategori/{id}', [BukuController::class, 'kategori_delete'])->name('buku.kategori.delete');
     
+    
+    //make kategori(crud kategori)
+    Route::resource('kategori', KategoriController::class);
 });
 
 

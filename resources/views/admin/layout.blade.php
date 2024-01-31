@@ -100,6 +100,11 @@
                                     <a href="{{route('buku.index')}}" class="submenu-link">Buku</a>
                                     
                                 </li>
+
+                                <li class="submenu-item  ">
+                                    <a href="{{route('kategori.index')}}" class="submenu-link">Kategori</a>
+                                    
+                                </li>
                         
                             </ul>
                             
