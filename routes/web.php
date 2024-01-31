@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PetugasController;
+use App\Http\Controllers\BukuController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,7 +41,11 @@ Route::prefix('admin')->group(function(){
 
     //make petugas(crud petugas)
     Route::resource('petugas', PetugasController::class);
-
+    
+    //make buku(crud buku)
+    Route::resource('buku', BukuController::class);
+    Route::post('buku/kategori', [BukuController::class, 'kategori_add'])->name('buku.kategori.add');
+    Route::delete('buku/kategori/{id}', [BukuController::class, 'kategori_delete'])->name('buku.kategori.delete');
     
 });
 

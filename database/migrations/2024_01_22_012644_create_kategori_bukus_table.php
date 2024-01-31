@@ -23,6 +23,12 @@ return new class extends Migration
         'created_at' => now(),
         'updated_at' => now(),
         ]);
+
+        DB::table('kategori_bukus')->insert([
+         'nama_kategori' => 'mistery',
+         'created_at' => now(),
+         'updated_at' => now(),
+         ]);
     }
 
     /**

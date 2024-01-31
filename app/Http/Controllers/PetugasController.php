@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon\carbon;
 use Auth;
 use App\Models\Petugas;
-use Carbon\carbon;
 use Illuminate\Support\Facades\Hash;
 
 class PetugasController extends Controller
@@ -97,6 +97,7 @@ class PetugasController extends Controller
 
         return redirect()->route('petugas.index');
     }
+    
 
     /**
      * Display the specified resource.

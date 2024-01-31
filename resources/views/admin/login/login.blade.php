@@ -26,7 +26,7 @@
                         <a href="index.html"><h1>INI LOGO UKK</h1></a>
                     </div>
                     <h1 class="auth-title">Log in admin.</h1>
-                    <p class="auth-subtitle mb-5">Log in with your data that you entered during registration.</p>
+                    <p class="auth-subtitle mb-3">Log in with your data that you entered during registration.</p>
 
                     <form action="{{route('login.proses.admin')}}" method="post">
                       @csrf
@@ -36,13 +36,13 @@
                                 <i class="bi bi-person"></i>
                             </div>
                         </div>
-                        <div class="form-group position-relative has-icon-left mb-4">
+                        <div class="form-group position-relative has-icon-left">
                             <input type="password" name="password" class="form-control form-control-xl" placeholder="Password">
                             <div class="form-control-icon">
                                 <i class="bi bi-shield-lock"></i>
                             </div>
                         </div>
-                        <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Log in</button>
+                        <button class="btn btn-primary btn-block btn-lg shadow-lg mt-2">Log in</button>
                     </form>
                 </div>
             </div>

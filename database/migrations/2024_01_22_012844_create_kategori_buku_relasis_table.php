@@ -25,6 +25,14 @@ return new class extends Migration
         'created_at' => now(),
         'updated_at' => now(),
         ]);
+
+         // Insert a new relasi
+       DB::table('kategori_buku_relasis')->insert([
+        'buku_id' => '1',
+        'kategori_id' => '2',
+        'created_at' => now(),
+        'updated_at' => now(),
+        ]);
     }
 
     /**
