@@ -1,5 +1,14 @@
 @extends('admin.layout')
 
+@section('notif')
+    @if(Session::get('success'))
+        <div class="alert alert-info alert-dismissible show fade">
+            {{Session::get('success')}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+@endsection
+
 @section('title')
     <h3>Dashboard</h3>
 @endsection

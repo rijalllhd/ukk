@@ -25,9 +25,22 @@
                     <div class="auth-logo">
                         <a href="index.html"><h1>INI LOGO UKK</h1></a>
                     </div>
-                    <h1 class="auth-title">Log in admin.</h1>
-                    <p class="auth-subtitle mb-3">Log in with your data that you entered during registration.</p>
 
+                    @if(Session::get('success'))
+                        <div class="alert alert-info alert-dismissible show fade">
+                            {{Session::get('success')}}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
+
+                    @if(Session::get('error'))
+                        <div class="alert alert-danger alert-dismissible show fade">
+                            {{Session::get('error')}}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
+
+                    <h1 class="auth-title">Log in admin.</h1>
                     <form action="{{route('login.proses.admin')}}" method="post">
                       @csrf
                         <div class="form-group position-relative has-icon-left mb-4">
@@ -53,6 +66,10 @@
             </div>
         </div>
       </div>
+
+      <script src="{{asset('asset/admin/static/js/components/dark.js')}}"></script>
+      <script src="{{asset('asset/admin/extensions/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
+      <script src="{{asset('asset/admin/compiled/js/app.js')}}"></script>
   </body>
 
 </html>

@@ -146,6 +146,8 @@
                 @yield('title')
                 <a href="{{route('logout.admin')}}">Logout</a>
             </div>
+
+            @yield('notif')
             
             <div class="page-content"> 
                 @yield('content')

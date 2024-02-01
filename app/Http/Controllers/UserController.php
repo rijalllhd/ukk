@@ -28,7 +28,7 @@ class UserController extends Controller
         $check = $request->all();
         if (Auth::attempt(['email'=> $check['email'], 'password'=>$check['password']])) {
             session()->regenerate();
-            return redirect()->route('dashboard.user');
+            return redirect()->route('dashboard.user')->with('success', 'Anda berhasil login.');
         } else {
             return back();
         }

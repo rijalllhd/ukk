@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('kode_peminjaman')->unique();
             $table->date('tanggal_peminjaman');
             $table->date('tanggal_kembali');
-            $table->enum('status', ['P','S','B']);
+            $table->enum('status', ['P','I','T','S','B']);
             $table->timestamps();
         });
 
@@ -31,7 +31,7 @@ return new class extends Migration
         'kode_peminjaman' => 'TDR-400',
         'tanggal_peminjaman' => '2024-1-14',
         'tanggal_kembali' => '2024-1-31',
-        'status' => 'B',
+        'status' => 'P',
         'created_at' => now(),
         'updated_at' => now(),
         ]);

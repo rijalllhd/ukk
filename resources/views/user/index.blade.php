@@ -9,5 +9,8 @@
     <h1>ini dashboard user</h1>
     <h2>welcome {{ Auth()->user()->username }}</h2>
     <a href="{{route('logout.user')}}">Logout</a>
+
+
+    
 </body>
 </html>

@@ -45,6 +45,13 @@ class BukuController extends Controller
             'tahun_terbit' => 'required|integer',
             'jumlah_buku' => 'required|integer',
             'cover' => 'required',
+        ],[
+            'judul.required'=>'Judul Wajib Diisi',
+            'penulis.required'=>'Penulis Wajib Diisi',
+            'sinopsis.required'=>'Sinopsis Wajib Diisi',
+            'tahun_terbit.required'=>'Tahun terbit Wajib Diisi',
+            'jumlah_buku.required'=>'Jumlah buku Wajib Diisi',
+            'cover.required'=>'cover Wajib Diisi',
         ]);
 
         // insert buku
@@ -60,7 +67,7 @@ class BukuController extends Controller
             'updated_at' => Carbon::now(),
         ];
         Buku::insert($buku);
-        return redirect()->route('buku.index');
+        return redirect()->route('buku.index')->with('success', 'Buku berhasil ditambah');
     }
 
     public function kategori_add(Request $request)
@@ -69,12 +76,15 @@ class BukuController extends Controller
         $request->validate([
             'buku_id' => 'required',
             'kategori_id' => 'required',
+        ],[
+            'buku_id.required'=>'Buku Wajib Diisi',
+            'kategori_id.required'=>'Kategori Wajib Diisi',
         ]);
 
         // Cek apakah relasi sudah ada?
-        $data = Kategori_buku_relasi::where('kategori_id', $request->kategori_id)->first();
+        $data = Kategori_buku_relasi::where('kategori_id', $request->kategori_id)->where('buku_id', $request->buku_id)->first();
         if ($data) {
-            return redirect()->route('buku.index');
+            return redirect()->route('buku.index')->with('error', 'Kategori telah tersedia di buku tersebut');
         }
 
         $kategori_buku_relasi = [
@@ -86,13 +96,13 @@ class BukuController extends Controller
 
         Kategori_buku_relasi::insert($kategori_buku_relasi);
 
-        return redirect()->route('buku.index');
+        return redirect()->route('buku.index')->with('success', 'Kategori buku berhasil ditambah');
     }
 
     public function kategori_delete(Request $request, $id)
     {
         Kategori_buku_relasi::where('id', $id)->delete();
-        return redirect()->route('buku.index');
+        return redirect()->route('buku.index')->with('error', 'Kategori berhasil dihapus dari buku');
     }
 
 
@@ -126,6 +136,13 @@ class BukuController extends Controller
             'tahun_terbit' => 'required|integer',
             'jumlah_buku' => 'required|integer',
             'cover' => 'required',
+        ],[
+            'judul.required'=>'Judul Wajib Diisi',
+            'penulis.required'=>'Penulis Wajib Diisi',
+            'sinopsis.required'=>'Sinopsis Wajib Diisi',
+            'tahun_terbit.required'=>'Tahun terbit Wajib Diisi',
+            'jumlah_buku.required'=>'Jumlah_buku Wajib Diisi',
+            'cover.required'=>'cover Wajib Diisi',
         ]);
 
         // insert buku
@@ -140,7 +157,7 @@ class BukuController extends Controller
             'updated_at' => Carbon::now(),
         ];
         Buku::where('id', $id)->update($buku);
-        return redirect()->route('buku.index');
+        return redirect()->route('buku.index')->with('success', 'Buku berhasil diubah');
     }
 
     /**
@@ -149,6 +166,6 @@ class BukuController extends Controller
     public function destroy(string $id)
     {
         Buku::where('id', $id)->delete();
-        return redirect()->route('buku.index');
+        return redirect()->route('buku.index')->with('success', 'Buku berhasil dihapus');
     }
 }

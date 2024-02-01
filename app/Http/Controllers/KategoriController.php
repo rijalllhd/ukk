@@ -40,7 +40,7 @@ class KategoriController extends Controller
         // Cek apakah kategori sudah ada?
         $data = Kategori_buku::where('nama_kategori', $request->nama_kategori)->first();
         if ($data) {
-            return redirect()->route('kategori.index');
+            return redirect()->route('kategori.index')->with('error', 'Nama kategori telah tersedia!!');
         }
 
         $kategori_buku = [
@@ -51,7 +51,7 @@ class KategoriController extends Controller
 
         Kategori_buku::insert($kategori_buku);
 
-        return redirect()->route('kategori.index');
+        return redirect()->route('kategori.index')->with('success', 'Kategori berhasil ditambahkan');
     }
 
     /**
@@ -85,7 +85,7 @@ class KategoriController extends Controller
         // Cek apakah kategori sudah ada?
         $data = Kategori_buku::where('nama_kategori', $request->nama_kategori)->first();
         if ($data) {
-            return redirect()->route('kategori.index');
+            return redirect()->route('kategori.index')->with('error', 'Nama kategori telah tersedia!!');
         }
 
         $kategori_buku = [
@@ -95,7 +95,7 @@ class KategoriController extends Controller
         ];
 
         Kategori_buku::where('id', $id )->update($kategori_buku);
-        return redirect()->route('kategori.index');
+        return redirect()->route('kategori.index')->with('success', 'Nama kategori berhasil di ubah');
     }
 
     /**
@@ -104,6 +104,6 @@ class KategoriController extends Controller
     public function destroy(string $id)
     {
         Kategori_buku::where('id', $id)->delete();
-        return redirect()->route('kategori.index');
+        return redirect()->route('kategori.index')->with('success', 'Nama kategori berhasil dihapus');
     }
 }

@@ -26,14 +26,14 @@ class AdminController extends Controller
         $check = $request->all();
         if (Auth::guard('admin')->attempt(['username'=>$check['username'], 'password'=>$check['password']])) {
             session()->regenerate();
-            return redirect()->route('dashboard.admin');
+            return redirect()->route('dashboard.admin')->with('success', 'Anda berhasil login.');
         } else {
-            return back();
+            return back()->with('error', 'Username atau password salah.');
         }
     }
 
     public function Logout(){
         Auth::guard('admin')->logout();
-        return redirect()->route('formlogin_admin');
+        return redirect()->route('formlogin_admin')->with('success', 'Anda berhasil logout.');
     }
 }
