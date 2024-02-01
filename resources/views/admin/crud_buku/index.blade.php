@@ -66,7 +66,7 @@
                                 @foreach ($data as $item)
                                     <tr>
                                         <td>{{$i++}}</td>
-                                        <td>{{ $item->cover }}</td>
+                                        <td><img src="{{ asset($item->cover) }}" alt="img" style="width:90px; height:120px; object-fit: cover;"></td>
                                         <td class="text-bold-500">{{ $item->judul }}</td>
                                         <td>{{ $item->penulis }}</td>
                                         <td>{{ $item->jumlah_buku }}</td>
@@ -82,7 +82,7 @@
                     </div>
                 </div>
             </div>
-
+            
             
             @foreach ($data as $item)
             <!--Kategori form Modal -->
@@ -216,7 +216,7 @@
                                     </tr>
                                     <tr>
                                         <td class="">Cover</td>
-                                        <td>{{$item->cover}}</td>
+                                        <td><img src="{{asset($item->cover)}}" alt="img" style="width:130px; height:160px; object-fit: cover;"></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -251,7 +251,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="{{route('buku.store')}}" method="post">
+                            <form action="{{route('buku.store')}}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <label for="judul">Judul: </label>
                                 <div class="form-group">
@@ -285,7 +285,7 @@
                                 </div>
                                 <label for="cover">Cover Buku: </label>
                                 <div class="form-group">
-                                    <input id="cover" name="cover" type="text" placeholder="Jumlah Buku"
+                                    <input id="cover" name="cover" type="file" placeholder="Cover Buku"
                                         class="form-control">
                                 </div>
     
@@ -322,7 +322,6 @@
             </div>
 
 
-
             @foreach ($data as $item)
             <!-- edit form modal -->
             <div class="modal fade text-left" id="edit_form{{$item->id}}" tabindex="-1" role="dialog"
@@ -340,7 +339,7 @@
                         
                         <div class="modal-body">
                             
-                            <form action="{{ url('admin/buku/'.$item->id) }}" method="post">
+                            <form action="{{ url('admin/buku/'.$item->id) }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                     <label for="judul">Judul: </label>
@@ -375,7 +374,7 @@
                                     </div>
                                     <label for="cover">Cover Buku: </label>
                                     <div class="form-group">
-                                        <input id="cover" name="cover" type="text" placeholder="{{$item->cover}}"
+                                        <input id="cover" name="cover" type="file" placeholder="{{$item->cover}}"
                                             class="form-control" value="{{ old('cover', $item->cover) }}">
                                     </div>
 
@@ -411,7 +410,6 @@
                 </div>
             </div>
             @endforeach
-
 
 
             @foreach ($data as $item)

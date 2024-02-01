@@ -49,6 +49,13 @@ class UserController extends Controller
 
     public function register_proses(Request $request){
         // dd($request->all());
+
+        // Cek apakah user sudah ada?
+        $data = User::where('email', $request->email)->first();
+        if ($data) {
+            return redirect()->route('login.user')->with('error', 'Email telah tersedia!!');
+        }
+
         User::insert([
             'username' => $request->username,
             'email' => $request->email,
@@ -58,7 +65,7 @@ class UserController extends Controller
             'created_at' => Carbon::now(),
         ]);
 
-        return redirect()->route('formlogin_user');
+        return redirect()->route('formlogin_user')->with('success', 'Akun berhasil di registrasi');
     }
 
 

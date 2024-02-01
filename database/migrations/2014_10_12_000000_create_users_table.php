@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('nama_lengkap');
             $table->string('alamat');
+            $table->string('profil');
             $table->rememberToken();
             $table->timestamps();
         });
@@ -32,6 +33,7 @@ return new class extends Migration
             'password' => $hashedPassword,
             'nama_lengkap' => 'user hadi',
             'alamat' => 'parung dengdek',
+            'profil' => 'suika.jpg',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
