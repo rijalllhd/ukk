@@ -31,6 +31,9 @@ Route::prefix('user')->group(function(){
     Route::get('/logout',[UserController::class, 'logout'])->name('logout.user');
     Route::get('/register',[UserController::class, 'register'])->name('formregister_user');
     Route::post('/register/proses',[UserController::class, 'register_proses'])->name('register.proses.user');
+    
+    // allbook
+    Route::get('/buku',[UserController::class, 'buku'])->name('buku.user');
 });
 
 
@@ -45,12 +48,15 @@ Route::prefix('admin')->group(function(){
     
     //make buku(crud buku)
     Route::resource('buku', BukuController::class);
+
+    //make kategori(crud kategori)
+    Route::resource('kategori', KategoriController::class);
+
+    // make relasi buku & kategori
     Route::post('buku/kategori', [BukuController::class, 'kategori_add'])->name('buku.kategori.add');
     Route::delete('buku/kategori/{id}', [BukuController::class, 'kategori_delete'])->name('buku.kategori.delete');
     
     
-    //make kategori(crud kategori)
-    Route::resource('kategori', KategoriController::class);
 });
 
 

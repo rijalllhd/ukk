@@ -197,7 +197,11 @@ class BukuController extends Controller
      */
     public function destroy(string $id)
     {
-        Buku::where('id', $id)->delete();
+        $buku = Buku::where('id', $id)->first();
+        if (File::exists($buku->cover)) {
+            File::delete($buku->cover);
+        }
+        $buku->delete();
         return redirect()->route('buku.index')->with('success', 'Buku berhasil dihapus');
     }
 }

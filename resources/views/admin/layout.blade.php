@@ -68,7 +68,7 @@
                         <li class="sidebar-title">Menu</li>
                         
                         <li
-                            class="sidebar-item active ">
+                            class="sidebar-item {{ Request::routeIs('dashboard.admin') ? 'active' : '' }}">
                             <a href="{{route('dashboard.admin')}}" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Dashboard</span>
@@ -86,7 +86,7 @@
                             
                             <ul class="submenu ">
                                 
-                                <li class="submenu-item ">
+                                <li class="submenu-item {{ Request::routeIs('petugas.index') ? 'active' : '' }}">
                                     <a href="{{route('petugas.index')}}" class="submenu-link">Petugas</a>
                                     
                                 </li>
@@ -96,12 +96,12 @@
                                     
                                 </li>
                                 
-                                <li class="submenu-item  ">
+                                <li class="submenu-item  {{ Request::routeIs('buku.index') ? 'active' : '' }}">
                                     <a href="{{route('buku.index')}}" class="submenu-link">Buku</a>
                                     
                                 </li>
 
-                                <li class="submenu-item  ">
+                                <li class="submenu-item  {{ Request::routeIs('kategori.index') ? 'active' : '' }}">
                                     <a href="{{route('kategori.index')}}" class="submenu-link">Kategori</a>
                                     
                                 </li>

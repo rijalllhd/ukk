@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Carbon\carbon;
+use App\Models\Buku;
 
 
 class UserController extends Controller
@@ -20,7 +21,14 @@ class UserController extends Controller
     }
 
     public function dashboard() {
-        return view('user.index');
+        // var_dump("Really go here");
+        $bukubaru = Buku::orderBy('created_at')->get();
+        return view('user.index', compact('bukubaru'));
+    }
+
+    public function buku(){
+        $bukus = Buku::all();
+        return view('user.buku', compact('bukus'));
     }
 
     public function login_proses(Request $request) {
@@ -68,5 +76,7 @@ class UserController extends Controller
         return redirect()->route('formlogin_user')->with('success', 'Akun berhasil di registrasi');
     }
 
+
+   
 
 }
