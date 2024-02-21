@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon\carbon;
+use Illuminate\Support\Str;
+use App\Models\Peminjaman;
 
 class PeminjamanController extends Controller
 {
@@ -27,7 +30,41 @@ class PeminjamanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        // Generate kode huruf
+        $randomh = strtoupper(Str::random(3));
+
+        // Generate kode angka
+        $randoma = mt_rand(1000, 9999);
+        
+        $randomCode = $randomh . "-" . $randoma;
+
+        // Periksa apakah kode sudah ada di database
+        $existingCode = Peminjaman::where('kode_peminjaman', $randomCode)->exists();
+
+        // Ulangi proses jika kode sudah ada di database
+        while ($existingCode) {
+            $randomh = strtoupper(Str::random(3));
+            $randoma = mt_rand(1000, 9999);
+            $randomCode = $randomh . "-" . $randoma;
+            $existingCode = Peminjaman::where('kode_peminjaman', $randomCode)->exists();
+        }
+
+        // insert buku
+        $peminjaman = [
+            'user_id' => $request->input('user_id'),
+            'buku_id' => $request->input('buku_id'),
+            'kode_peminjaman' => $randomCode,
+            'tanggal_peminjaman' => $request->input('tanggal_peminjaman'),
+            'tanggal_kembali' => Carbon::parse($request->input('tanggal_peminjaman'))->addWeek(),
+            'status' => "P",
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ];
+
+        // dd($peminjaman);
+        Peminjaman::insert($peminjaman);
+        return redirect()->route('dashboard.user')->with('success', 'Peminjaman berhasil dibuat');
     }
 
     /**

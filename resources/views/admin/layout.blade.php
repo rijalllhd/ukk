@@ -78,7 +78,7 @@
                         </li>
                         
                         <li
-                            class="sidebar-item  has-sub">
+                            class="sidebar-item  has-sub {{ Request::routeIs('petugas.index','buku.index','kategori.index' ) ? 'active' : '' }}">
                             <a href="#" class='sidebar-link'>
                                 <i class="bi bi-stack"></i>
                                 <span>Master Data</span>

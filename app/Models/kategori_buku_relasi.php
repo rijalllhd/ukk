@@ -13,8 +13,8 @@ class kategori_buku_relasi extends Model
     protected $table = 'kategori_buku_relasis';
     public $timestamps = false;
 
-    public function kategori_buku() 
-    {
-        return $this->belongsTo(kategori_buku::class, 'kategori_id', 'id');
-    }
+    // public function kategori_buku() 
+    // {
+    //     return $this->belongsTo(kategori_buku::class, 'kategori_id', 'id');
+    // }
 }

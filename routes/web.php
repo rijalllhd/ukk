@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\PeminjamanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,12 @@ Route::prefix('user')->group(function(){
     
     // allbook
     Route::get('/buku',[UserController::class, 'buku'])->name('buku.user');
+    
+    // pinjam buku
+    Route::resource('peminjaman', PeminjamanController::class);
+
+    // history
+    Route::get('/history',[UserController::class, 'history'])->name('history.user');
 });
 
 

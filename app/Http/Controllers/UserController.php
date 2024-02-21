@@ -31,6 +31,10 @@ class UserController extends Controller
         return view('user.buku', compact('bukus'));
     }
 
+    public function history(){
+        return view('user.history');
+    }
+
     public function login_proses(Request $request) {
         // dd($request->all());   
         $check = $request->all();

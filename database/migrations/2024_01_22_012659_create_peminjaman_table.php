@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('peminjaman', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->integer('petugas_id');
+            $table->integer('petugas_id')->nullable();
             $table->integer('buku_id');
             $table->string('kode_peminjaman')->unique();
             $table->date('tanggal_peminjaman');
