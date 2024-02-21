@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Carbon\carbon;
 use Illuminate\Support\Str;
+use Auth;
 use App\Models\Peminjaman;
 
 class PeminjamanController extends Controller
@@ -62,9 +63,18 @@ class PeminjamanController extends Controller
             'updated_at' => Carbon::now(),
         ];
 
+        $cekpinjam = Peminjaman::where('user_id', Auth::user()->id)->where('buku_id', $request->input('buku_id'))->where('status', 'P')->exists();
+
+        if ($cekpinjam) {
+            return redirect()->route('history.user')->with('success', 'Peminjaman gagal dibuat');
+        } else {
+            Peminjaman::insert($peminjaman);
+            return redirect()->route('history.user')->with('success', 'Peminjaman berhasil dibuat');
+        }
+
         // dd($peminjaman);
-        Peminjaman::insert($peminjaman);
-        return redirect()->route('dashboard.user')->with('success', 'Peminjaman berhasil dibuat');
+        
+        
     }
 
     /**

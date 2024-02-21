@@ -1,5 +1,8 @@
 @extends('user.layout')
 
+@section('page')
+  Seluruh Buku
+@endsection
 
 @section('title')
   <h2 class="page-title">Seluruh Buku</h2>
