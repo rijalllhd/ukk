@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Carbon\carbon;
 use App\Models\Buku;
+use App\Models\Peminjaman;
 
 
 class UserController extends Controller
@@ -32,7 +33,9 @@ class UserController extends Controller
     }
 
     public function history(){
-        return view('user.history');
+        $history = Peminjaman::where('user_id', Auth::user()->id)->get();
+
+        return view('user.history', compact('history'));
     }
 
     public function login_proses(Request $request) {

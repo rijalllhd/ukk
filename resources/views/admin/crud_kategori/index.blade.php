@@ -1,5 +1,8 @@
 @extends('admin.layout')
 
+@section("page")
+    Data Kategori -  Admin
+@endsection
 
 @section('title')
     <h3>Data Kategori</h3>

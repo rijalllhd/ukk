@@ -1,11 +1,11 @@
-@extends('admin.layout')
+@extends('petugas.layout')
 
-@section("page")
-    Data Petugas -  Admin
+@section('page')
+    Data Kategori - Petugas
 @endsection
 
 @section('title')
-    <h3>Data Petugas</h3>
+    <h3>Data Kategori</h3>
 @endsection
 
 
@@ -19,7 +19,34 @@
                                     data-bs-target="#create_form"><i class="bi bi-file-earmark-plus me-2"></i>Tambah Data</a>
             </div>
             
+
+            <!-- table -->
             <div class="col-12">
+
+                
+                @if(Session::get('success'))
+                    <div class="alert alert-success alert-dismissible show fade">
+                        {{Session::get('success')}}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+
+                @if(Session::get('error'))
+                    <div class="alert alert-danger alert-dismissible show fade">
+                        {{Session::get('error')}}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+
+                @if($errors->any())
+                    <div class="alert alert-danger alert-dismissible show fade">
+                        @foreach ($errors->all() as $error)
+                            {{ $error }}
+                        @endforeach
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+
                 <div class="card">
 
                     <div class="card-content">
@@ -29,10 +56,7 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Nama</th>
-                                        <th>Username</th>
-                                        <th>Email</th>
-                                        <th>Alamat</th>
+                                        <th>Nama Kategori</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -41,11 +65,9 @@
                                 @foreach ($data as $item)
                                     <tr>
                                         <td>{{$i++}}</td>
-                                        <td class="text-bold-500">{{ $item->nama_lengkap }}</td>
-                                        <td>{{ $item->username }}</td>
-                                        <td>{{ $item->email }}</td>
-                                        <td>{{ $item->alamat }}</td>
-                                        <td><a href="#" data-bs-toggle="modal" data-bs-target="#edit_form{{$item->id}}"><i class="bi bi-pencil-square me-2"></i></a>
+                                        <td>{{ $item->nama_kategori }}</td>
+                                        <td>
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#edit_form{{$item->id}}"><i class="bi bi-pencil-square me-2"></i></a>
                                             <a href="#" data-bs-toggle="modal" data-bs-target="#delete_form{{$item->id}}"><i class="bi bi-trash3"></i></a></td>
                                     </tr>
                                 @endforeach
@@ -56,7 +78,7 @@
                 </div>
             </div>
 
-            
+
             <!--Create form Modal -->
             <div class="modal fade text-left" id="create_form" tabindex="-1" role="dialog"
                 aria-labelledby="myModalLabel33" aria-hidden="true">
@@ -64,38 +86,18 @@
                     role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="myModalLabel33">Create Petugas Form </h4>
+                            <h4 class="modal-title" id="myModalLabel33">Create Kategori Form </h4>
                             <button type="button" class="close" data-bs-dismiss="modal"
                                 aria-label="Close">
                                 <i data-feather="x"></i>
                             </button>
                         </div>
-                        <form action="{{route('petugas.store')}}" method="post">
+                        <form action="{{route('kategori.store')}}" method="post">
                             @csrf
                             <div class="modal-body">
-                                <label for="nama_lengkap">Nama lengkap: </label>
+                                <label for="judul">Nama Kategori: </label>
                                 <div class="form-group">
-                                    <input id="nama_lengkap" name="nama_lengkap" type="text" placeholder="Nama lengkap"
-                                        class="form-control">
-                                </div>
-                                <label for="username">Username: </label>
-                                <div class="form-group">
-                                    <input id="username" name="username" type="text" placeholder="Username"
-                                        class="form-control">
-                                </div>
-                                <label for="alamat">Alamat: </label>
-                                <div class="form-group">
-                                    <input id="alamat" name="alamat" type="text" placeholder="Alamat"
-                                        class="form-control">
-                                </div>
-                                <label for="email">Email: </label>
-                                <div class="form-group">
-                                    <input id="email" name="email" type="text" placeholder="Email Address"
-                                        class="form-control">
-                                </div>
-                                <label for="password">Password: </label>
-                                <div class="form-group">
-                                    <input id="password" name="password" type="password" placeholder="Password"
+                                    <input id="nama_kategori" name="nama_kategori" type="text" placeholder="Nama Kategori"
                                         class="form-control">
                                 </div>
                             </div>
@@ -124,41 +126,22 @@
                     role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="myModalLabel33">Edit Petugas Form ({{$item->username}}) </h4>
+                            <h4 class="modal-title" id="myModalLabel33">Edit Kategori Form ({{$item->nama_kategori}}) </h4>
                             <button type="button" class="close" data-bs-dismiss="modal"
                                 aria-label="Close">
                                 <i data-feather="x"></i>
                             </button>
                         </div>
-                        <form action="{{ url('admin/petugas/'.$item->id) }}" method="post">
+                        <form action="{{ url('admin/kategori/'.$item->id) }}" method="post">
                             @csrf
                             @method('PUT')
                             <div class="modal-body">
-                                <label for="nama_lengkap">Nama lengkap: </label>
+                                <label for="Nama Kategori">Nama Kategori: </label>
                                 <div class="form-group">
-                                    <input id="nama_lengkap" name="nama_lengkap" type="text" placeholder="{{$item->nama_lengkap}}"
-                                        class="form-control" value="{{ old('nama_lengkap', $item->nama_lengkap) }}">
+                                    <input id="nama_kategori" name="nama_kategori" type="text" placeholder="{{$item->nama_kategori}}"
+                                        class="form-control" value="{{ old('nama_kategori', $item->nama_kategori) }}">
                                 </div>
-                                <label for="username">Username: </label>
-                                <div class="form-group">
-                                    <input id="username" name="username" type="text" placeholder="{{$item->username}}"
-                                        class="form-control" value="{{ old('username', $item->username) }}">
-                                </div>
-                                <label for="alamat">Alamat: </label>
-                                <div class="form-group">
-                                    <input id="alamat" name="alamat" type="text" placeholder="{{$item->alamat}}"
-                                        class="form-control" value="{{ old('alamat', $item->alamat) }}">
-                                </div>
-                                <label for="email">Email: </label>
-                                <div class="form-group">
-                                    <input id="email" name="email" type="text" placeholder="Email"
-                                        class="form-control">
-                                </div>
-                                <label for="password">Password: </label>
-                                <div class="form-group">
-                                    <input id="password" name="password" type="password" placeholder="Password"
-                                        class="form-control">
-                                </div>
+                                        
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-light-secondary"
@@ -169,7 +152,7 @@
                                 <button type="submit" class="btn btn-primary ms-1"
                                     data-bs-dismiss="modal">
                                     <i class="bx bx-check d-block d-sm-none"></i>
-                                    <span class="d-none d-sm-block">login</span>
+                                    <span class="d-none d-sm-block">Simpan</span>
                                 </button>
                             </div>
                         </form>
@@ -186,9 +169,9 @@
                     role="document">
                     <div class="modal-content">
                         <div class="modal-header bg-danger">
-                            <h4 class="modal-title text-white" id="myModalLabel33">Delete Petugas Form </h4>
+                            <h4 class="modal-title text-white" id="myModalLabel33">Delete Kategori </h4>
                         </div>
-                        <form action="{{ url('admin/petugas/'.$item->id) }}" method="post">
+                        <form action="{{ url('admin/kategori/'.$item->id) }}" method="post">
                             @csrf
                             @method('DELETE')
                             <div class="modal-body">

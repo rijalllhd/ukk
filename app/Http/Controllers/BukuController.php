@@ -8,6 +8,7 @@ use App\Models\Buku;
 use App\Models\Kategori_buku;
 use App\Models\Kategori_buku_relasi;
 use Illuminate\Support\Facades\File;
+use Auth;
 
 
 class BukuController extends Controller
@@ -21,6 +22,14 @@ class BukuController extends Controller
         $kategori_buku = Kategori_buku::all();
         $kategori_buku_relasi = Kategori_buku_relasi::all();
         return view('admin.crud_buku.index', compact('data','kategori_buku','kategori_buku_relasi'));
+    }
+
+    public function indexp()
+    {
+        $data = Buku::all();
+        $kategori_buku = Kategori_buku::all();
+        $kategori_buku_relasi = Kategori_buku_relasi::all();
+        return view('petugas.crud_buku.index', compact('data','kategori_buku','kategori_buku_relasi'));
     }
 
     /**
@@ -82,7 +91,12 @@ class BukuController extends Controller
             'updated_at' => Carbon::now(),
         ];
         Buku::insert($buku);
-        return redirect()->route('buku.index')->with('success', 'Buku berhasil ditambah');
+
+        if (Auth::guard('petugas')->check()) {
+            return redirect()->route('crud_buku.petugas')->with('success', 'Buku berhasil ditambah');
+        } else {
+            return redirect()->route('buku.index')->with('success', 'Buku berhasil ditambah');
+        }
     }
 
     public function kategori_add(Request $request)
@@ -99,7 +113,11 @@ class BukuController extends Controller
         // Cek apakah relasi sudah ada?
         $data = Kategori_buku_relasi::where('kategori_id', $request->kategori_id)->where('buku_id', $request->buku_id)->first();
         if ($data) {
-            return redirect()->route('buku.index')->with('error', 'Kategori telah tersedia di buku tersebut');
+            if (Auth::guard('petugas')->check()) {
+                return redirect()->route('crud_buku.petugas')->with('error', 'Kategori telah tersedia di buku tersebut');
+            } else {
+                return redirect()->route('buku.index')->with('error', 'Kategori telah tersedia di buku tersebut');
+            }
         }
 
         $kategori_buku_relasi = [
@@ -111,13 +129,21 @@ class BukuController extends Controller
 
         Kategori_buku_relasi::insert($kategori_buku_relasi);
 
-        return redirect()->route('buku.index')->with('success', 'Kategori buku berhasil ditambah');
+        if (Auth::guard('petugas')->check()) {
+            return redirect()->route('crud_buku.petugas')->with('success', 'Kategori buku berhasil ditambah');
+        } else {
+            return redirect()->route('buku.index')->with('success', 'Kategori buku berhasil ditambah');
+        }
     }
 
     public function kategori_delete(Request $request, $id)
     {
         Kategori_buku_relasi::where('id', $id)->delete();
-        return redirect()->route('buku.index')->with('error', 'Kategori berhasil dihapus dari buku');
+        if (Auth::guard('petugas')->check()) {
+            return redirect()->route('crud_buku.petugas')->with('success', 'Kategori berhasil dihapus dari buku');
+        } else {
+            return redirect()->route('buku.index')->with('success', 'Kategori berhasil dihapus dari buku');
+        }
     }
 
 
@@ -189,7 +215,11 @@ class BukuController extends Controller
             $buku->updated_at = Carbon::now();
             $buku->save();
 
-        return redirect()->route('buku.index')->with('success', 'Buku berhasil diubah');
+        if (Auth::guard('petugas')->check()) {
+            return redirect()->route('crud_buku.petugas')->with('success', 'Buku berhasil diubah');
+        } else {
+            return redirect()->route('buku.index')->with('success', 'Buku berhasil diubah');
+        }
     }
 
     /**
@@ -202,6 +232,11 @@ class BukuController extends Controller
             File::delete($buku->cover);
         }
         $buku->delete();
-        return redirect()->route('buku.index')->with('success', 'Buku berhasil dihapus');
+
+        if (Auth::guard('petugas')->check()) {
+            return redirect()->route('crud_buku.petugas')->with('success', 'Buku berhasil dihapus');
+        } else {
+            return redirect()->route('buku.index')->with('success', 'Buku berhasil dihapus');
+        }
     }
 }

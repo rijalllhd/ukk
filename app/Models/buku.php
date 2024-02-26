@@ -14,13 +14,4 @@ class buku extends Model
     ];
     protected $table = 'bukus';
     
-    public function kategori_buku_relasi()
-    {
-        return $this->hasMany(Kategori_buku_relasi::class);
-    }
-
-    public function peminjaman()
-    {
-        return $this->hasMany(Peminjaman::class);
-    }
 }

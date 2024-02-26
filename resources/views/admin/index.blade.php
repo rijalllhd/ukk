@@ -1,5 +1,10 @@
 @extends('admin.layout')
 
+@section("page")
+    Dashboard -  Admin
+@endsection
+
+
 @section('notif')
     @if(Session::get('success'))
         <div class="alert alert-info alert-dismissible show fade">

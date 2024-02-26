@@ -27,9 +27,9 @@ class PetugasController extends Controller
         $check = $request->all();
         if (Auth::guard('petugas')->attempt(['email'=>$check['email'], 'password'=>$check['password']])) {
             session()->regenerate();
-            return redirect()->route('dashboard.petugas');
+            return redirect()->route('dashboard.petugas')->with('success', 'Anda berhasil login.');
         } else {
-            return back();
+            return back()->with('error', 'Username atau Password Anda Salah');
         }
     }
 

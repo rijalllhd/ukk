@@ -62,7 +62,7 @@ Route::prefix('admin')->group(function(){
     // make relasi buku & kategori
     Route::post('buku/kategori', [BukuController::class, 'kategori_add'])->name('buku.kategori.add');
     Route::delete('buku/kategori/{id}', [BukuController::class, 'kategori_delete'])->name('buku.kategori.delete');
-    
+
     
 });
 
@@ -74,4 +74,12 @@ Route::prefix('petugas')->group(function(){
     Route::post('/login/proses',[PetugasController::class, 'login_proses'])->name('login.proses.petugas');
     Route::get('/logout',[PetugasController::class, 'logout'])->name('logout.petugas');
     
+    //make buku(crud buku)
+    Route::get('/buku', [BukuController::class, 'indexp'])->name('crud_buku.petugas');
+
+    //make kategori(crud kategori)
+    Route::get('/kategori', [KategoriController::class, 'indexp'])->name('crud_kategori.petugas');
+
+    //acc peminjaman
+    Route::get('/peminjaman', [PeminjamanController::class, 'index'])->name('crud_peminjaman.petugas');
 });

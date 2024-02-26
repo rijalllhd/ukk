@@ -13,8 +13,4 @@ class kategori_buku extends Model
     protected $table = 'kategori_bukus';
     public $timestamps = false;
 
-    public function kategori_buku_relasi()
-    {
-        return $this->hasMany(Kategori_buku_relasi::class);
-    }
 }

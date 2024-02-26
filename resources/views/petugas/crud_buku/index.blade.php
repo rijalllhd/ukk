@@ -1,7 +1,7 @@
-@extends('admin.layout')
+@extends('petugas.layout')
 
-@section("page")
-    Data Buku -  Admin
+@section('page')
+    Data Buku - Petugas
 @endsection
 
 @section('title')
@@ -71,13 +71,11 @@
                                         <td><img src="{{ asset($item->cover) }}" alt="img" style="width:90px; height:120px; object-fit: cover;"></td>
                                         <td class="text-bold-500">{{ $item->judul }}</td>
                                         <td>{{ $item->penulis }}</td>
-                                        <td>
-                                            @if($item->jumlah_buku > 0)
+                                        <td>@if($item->jumlah_buku > 0)
                                                 {{$item->jumlah_buku}} <span class="text-success">Tersedia</span>
                                             @else
                                                 <span class="text-danger">Tidak Tersedia</span>
-                                            @endif
-                                        </td>
+                                            @endif</td>
                                         <td><a href="#" data-bs-toggle="modal" data-bs-target="#kategori_form{{$item->id}}"><i class="bi bi-bookmarks-fill"></i><span class="ms-2">Kategori</span></a></td>
                                         <td><a href="#" data-bs-toggle="modal" data-bs-target="#info_form{{$item->id}}"><i class="bi bi-info-circle me-2"></i></a>
                                             <a href="#" data-bs-toggle="modal" data-bs-target="#edit_form{{$item->id}}"><i class="bi bi-pencil-square me-2"></i></a>
@@ -221,7 +219,7 @@
                                                 {{$item->jumlah_buku}} <span class="text-success">Tersedia</span>
                                             @else
                                                 <span class="text-danger">Tidak Tersedia</span>
-                                            @endif
+                                            @endif    
                                         </td>
                                     </tr>
                                     <tr>

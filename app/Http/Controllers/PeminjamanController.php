@@ -15,7 +15,8 @@ class PeminjamanController extends Controller
      */
     public function index()
     {
-        //
+        $data = Peminjaman::all();
+        return view('petugas.crud_peminjaman.index', compact('data'));
     }
 
     /**

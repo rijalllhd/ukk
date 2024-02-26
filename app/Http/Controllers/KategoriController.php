@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Carbon\carbon;
 use App\Models\Kategori_buku;
+use Auth;
 
 class KategoriController extends Controller
 {
@@ -15,6 +16,12 @@ class KategoriController extends Controller
     {
         $data = Kategori_buku::all();
         return view('admin.crud_kategori.index', compact('data'));
+    }
+
+    public function indexp()
+    {
+        $data = Kategori_buku::all();
+        return view('petugas.crud_kategori.index', compact('data'));
     }
 
     /**
@@ -40,7 +47,11 @@ class KategoriController extends Controller
         // Cek apakah kategori sudah ada?
         $data = Kategori_buku::where('nama_kategori', $request->nama_kategori)->first();
         if ($data) {
-            return redirect()->route('kategori.index')->with('error', 'Nama kategori telah tersedia!!');
+            if (Auth::guard('petugas')->check()) {
+                return redirect()->route('crud_kategori.petugas')->with('error', 'Nama kategori telah tersedia!!');
+            } else {
+                return redirect()->route('kategori.index')->with('error', 'Nama kategori telah tersedia!!');
+            }
         }
 
         $kategori_buku = [
@@ -51,7 +62,11 @@ class KategoriController extends Controller
 
         Kategori_buku::insert($kategori_buku);
 
-        return redirect()->route('kategori.index')->with('success', 'Kategori berhasil ditambahkan');
+        if (Auth::guard('petugas')->check()) {
+            return redirect()->route('crud_kategori.petugas')->with('success', 'Kategori berhasil ditambahkan');
+        } else {
+            return redirect()->route('kategori.index')->with('success', 'Kategori berhasil ditambahkan');
+        }
     }
 
     /**
@@ -95,7 +110,12 @@ class KategoriController extends Controller
         ];
 
         Kategori_buku::where('id', $id )->update($kategori_buku);
-        return redirect()->route('kategori.index')->with('success', 'Nama kategori berhasil di ubah');
+
+        if (Auth::guard('petugas')->check()) {
+            return redirect()->route('crud_kategori.petugas')->with('success', 'Nama kategori berhasil di ubah');
+        } else {
+            return redirect()->route('kategori.index')->with('success', 'Nama kategori berhasil di ubah');
+        }
     }
 
     /**
@@ -104,6 +124,11 @@ class KategoriController extends Controller
     public function destroy(string $id)
     {
         Kategori_buku::where('id', $id)->delete();
-        return redirect()->route('kategori.index')->with('success', 'Nama kategori berhasil dihapus');
+
+        if (Auth::guard('petugas')->check()) {
+            return redirect()->route('crud_kategori.petugas')->with('success', 'Nama kategori berhasil dihapus');
+        } else {
+            return redirect()->route('kategori.index')->with('success', 'Nama kategori berhasil dihapus');
+        }
     }
 }

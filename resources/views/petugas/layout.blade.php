@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield("page")</title>
+    <title>@yield("page") </title>
     
     <link rel="stylesheet" href="{{asset('asset/admin/extensions/choices.js/public/assets/styles/choices.css')}}">
     
@@ -66,8 +66,8 @@
                         <li class="sidebar-title">Menu</li>
                         
                         <li
-                            class="sidebar-item {{ Request::routeIs('dashboard.admin') ? 'active' : '' }}">
-                            <a href="{{route('dashboard.admin')}}" class='sidebar-link'>
+                            class="sidebar-item {{ Request::routeIs('dashboard.petugas') ? 'active' : '' }}">
+                            <a href="{{route('dashboard.petugas')}}" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Dashboard</span>
                             </a>
@@ -76,7 +76,7 @@
                         </li>
                         
                         <li
-                            class="sidebar-item  has-sub {{ Request::routeIs('petugas.index','buku.index','kategori.index' ) ? 'active' : '' }}">
+                            class="sidebar-item  has-sub {{ Request::routeIs('petugas.index','crud_buku.petugas','crud_kategori.petugas' ) ? 'active' : '' }}">
                             <a href="#" class='sidebar-link'>
                                 <i class="bi bi-stack"></i>
                                 <span>Master Data</span>
@@ -84,24 +84,18 @@
                             
                             <ul class="submenu ">
                                 
-                                <li class="submenu-item {{ Request::routeIs('petugas.index') ? 'active' : '' }}">
-                                    <a href="{{route('petugas.index')}}" class="submenu-link">Petugas</a>
-                                    
-                                </li>
-                                
                                 <li class="submenu-item  ">
                                     <a href="component-alert.html" class="submenu-link">Pengguna</a>
                                     
                                 </li>
                                 
-                                <li class="submenu-item  {{ Request::routeIs('buku.index') ? 'active' : '' }}">
-                                    <a href="{{route('buku.index')}}" class="submenu-link">Buku</a>
+                                <li class="submenu-item  {{ Request::routeIs('crud_buku.petugas') ? 'active' : '' }}">
+                                    <a href="{{route('crud_buku.petugas')}}" class="submenu-link">Buku</a>
                                     
                                 </li>
 
-                                <li class="submenu-item  {{ Request::routeIs('kategori.index') ? 'active' : '' }}">
-                                    <a href="{{route('kategori.index')}}" class="submenu-link">Kategori</a>
-                                    
+                                <li class="submenu-item  {{ Request::routeIs('crud_kategori.petugas') ? 'active' : '' }}">
+                                    <a href="{{route('crud_kategori.petugas')}}" class="submenu-link">Kategori</a>
                                 </li>
                         
                             </ul>
@@ -118,8 +112,8 @@
                         </li>
 
                         <li
-                            class="sidebar-item  ">
-                            <a href="index.html" class='sidebar-link'>
+                            class="sidebar-item  {{ Request::routeIs('crud_peminjaman.petugas') ? 'active' : '' }}">
+                            <a href="{{route('crud_peminjaman.petugas')}}" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Peminjaman</span>
                             </a>
@@ -142,7 +136,7 @@
                     
             <div class="page-heading">
                 @yield('title')
-                <a href="{{route('logout.admin')}}">Logout</a>
+                <a href="{{route('logout.petugas')}}">Logout</a>
             </div>
 
             @yield('notif')
@@ -162,7 +156,6 @@
 
         </div>
     </div>
-    
     <script src="{{asset('/asset/admin/static/js/components/dark.js')}}"></script>
     <script src="{{asset('/asset/admin/extensions/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
     

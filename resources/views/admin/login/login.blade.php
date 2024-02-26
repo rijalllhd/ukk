@@ -6,8 +6,6 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Login Admin</title>
       
-      
-      
       <link rel="shortcut icon" href="{{asset('asset/admin/compiled/svg/favicon.svg')}}" type="image/x-icon">
       <link rel="stylesheet" href="{{asset('asset/admin/compiled/css/app.css')}}">
       <link rel="stylesheet" href="{{asset('asset/admin/compiled/css/app-dark.css')}}">
