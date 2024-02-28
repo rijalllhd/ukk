@@ -14,11 +14,22 @@
   <div class="row justify-content-center">
 
     @if(Session::get('success'))
+      <div class="alert alert-success alert-dismissible col-8" role="alert">
+        <div class="d-flex">
+          <div>
+            <h4 class="alert-title">Peminjaman Berhasil Dibuat!</h4>
+            <div class="text-secondary">{{Session::get('success')}}</div>
+          </div>
+        </div>
+        <a class="btn-close" data-bs-dismiss="alert" aria-label="close"></a>
+      </div>
+    @endif
+    @if(Session::get('error'))
       <div class="alert alert-danger alert-dismissible col-8" role="alert">
         <div class="d-flex">
           <div>
-            <h4 class="alert-title">{{Session::get('success')}}</h4>
-            <div class="text-secondary">Your account has been saved!</div>
+            <h4 class="alert-title">Peminjaman Gagal Dibuat!</h4>
+            <div class="text-secondary">{{Session::get('error')}}</div>
           </div>
         </div>
         <a class="btn-close" data-bs-dismiss="alert" aria-label="close"></a>

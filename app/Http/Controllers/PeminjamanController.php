@@ -7,6 +7,7 @@ use Carbon\carbon;
 use Illuminate\Support\Str;
 use Auth;
 use App\Models\Peminjaman;
+use App\Models\Buku;
 
 class PeminjamanController extends Controller
 {
@@ -64,13 +65,17 @@ class PeminjamanController extends Controller
             'updated_at' => Carbon::now(),
         ];
 
-        $cekpinjam = Peminjaman::where('user_id', Auth::user()->id)->where('buku_id', $request->input('buku_id'))->where('status', 'P')->exists();
+        $cekpinjam = Peminjaman::where('user_id', Auth::user()->id)->where('buku_id', $request->input('buku_id'))->first();
 
-        if ($cekpinjam) {
-            return redirect()->route('history.user')->with('success', 'Peminjaman gagal dibuat');
+        if ($cekpinjam->status == "P") {
+            return redirect()->route('history.user')->with('error', 'Buku yang anda pinjam sudah dalam proses antrean!');
+        } elseif($cekpinjam->status == "B") {
+            return redirect()->route('history.user')->with('error', 'Anda belum bisa eminjam buku karena masi dalam waktu peminjaman');
+        } elseif ($cekpinjam->status == "I") {
+            return redirect()->route('history.user')->with('error', 'Buku yang ingin anda pinjam sudah diterima admin, silahkan cek dalam antrean!');
         } else {
             Peminjaman::insert($peminjaman);
-            return redirect()->route('history.user')->with('success', 'Peminjaman berhasil dibuat');
+            return redirect()->route('history.user')->with('success', 'Menunggu buku diverif petugas');
         }
 
         // dd($peminjaman);
@@ -99,7 +104,30 @@ class PeminjamanController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // dd($request->all());
+        $peminjaman = [
+            'petugas_id' => $request->input('petugas_id'),
+            'status' => $request->input('status'),
+            'updated_at' => Carbon::now(),
+        ];
+
+        if ($request->input('status') == "I") {    
+            $buku = Buku::where('id', $request->input('buku_id'))->first();
+            $buku->jumlah_buku -= 1;
+            $buku->save();
+        }
+
+        if ($request->input('status') == "S") {    
+            $buku = Buku::where('id', $request->input('buku_id'))->first();
+            $buku->jumlah_buku += 1;
+            $buku->save();
+        }
+
+        Peminjaman::where('id', $id )->update($peminjaman);
+
+
+        return redirect()->route('crud_peminjaman.petugas')->with('success', 'Status berhasil di ubah');
+
     }
 
     /**

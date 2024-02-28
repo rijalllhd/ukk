@@ -52,6 +52,7 @@
                                     <th>Nama Peminjam</th>
                                     <th>Judul Buku</th>
                                     <th>Tanggal pinjam</th>
+                                    <th>Status</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -63,6 +64,19 @@
                                     <td>{{ $item->user->username }}</td>
                                     <td>{{ $item->buku->judul }}</td>
                                     <td>{{ $item->tanggal_peminjaman }}</td>
+                                    <td>
+                                        @if($item->status == "P")
+                                            <div class="badge bg-info">Dalam proses</div>
+                                        @elseif($item->status == "I")
+                                            <div class="badge bg-success">Diterima</div>
+                                        @elseif($item->status == "T")
+                                            <div class="badge bg-danger">Ditolak</div>
+                                        @elseif($item->status == "B")
+                                            <div class="badge bg-warning">Sedang Dipinjam</div>
+                                        @else
+                                            <div class="badge bg-secondary">Selesai Dipinjam</div>
+                                        @endif
+                                    </td>
                                     <td>
                                         <a href="#" data-bs-toggle="modal" data-bs-target="#info_form{{$item->id}}"><i class="bi bi-info-circle me-2"></i></a>
                                 </tr>
@@ -129,8 +143,24 @@
                                         </td>
                                     </tr>
                                     <tr>
+                                        <td class="">Status</td>
+                                        <td>
+                                            @if($item->status == "P")
+                                                <div class="badge bg-info">Dalam proses</div>
+                                            @elseif($item->status == "I")
+                                                <div class="badge bg-success">Diterima</div>
+                                            @elseif($item->status == "T")
+                                                <div class="badge bg-danger">Ditolak</div>
+                                            @elseif($item->status == "B")
+                                                <div class="badge bg-warning">Sedang Dipinjam</div>
+                                            @else
+                                                <div class="badge bg-secondary">Selesai Dipinjam</div>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    <tr>
                                         <td class="">Cover</td>
-                                        <td><img src="{{asset($item->cover)}}" alt="img" style="width:130px; height:160px; object-fit: cover;"></td>
+                                        <td><img src="{{asset($item->buku->cover)}}" alt="img" style="width:130px; height:160px; object-fit: cover;"></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -143,6 +173,31 @@
                                 <i class="bx bx-x d-block d-sm-none"></i>
                                 <span class="d-none d-sm-block">Close</span>
                             </button>
+                            <form action="{{ url('user/peminjaman/'.$item->id) }}" method="post">
+                                @csrf
+                                @method('PUT')
+
+                                <input type="text" value="{{ Auth::guard('petugas')->user()->id }}" name="petugas_id" hidden>
+                                <input type="text" value="1" name="jumlah_buku" hidden>
+                                <input type="text" value="{{ $item->buku_id }}" name="buku_id" hidden>
+                                @if($item->status == "B")
+                                    <button type="submit" name="status" value="S" class="btn btn-secondary">
+                                        Selesai
+                                    </button>
+                                @elseif($item->status == "P")
+                                    <button type="submit"name="status" value="T" class="btn btn-danger">
+                                        Tidak
+                                    </button>
+                                    <button type="submit" name="status" value="I" class="btn btn-success">
+                                        Terima
+                                    </button>
+                                @elseif ($item->status == "I")
+                                    <button type="submit" name="status" value="B" class="btn btn-warning">
+                                        Sudah diambil
+                                    </button>
+                                @endif
+
+                            </form>
                         </div>
                     </div>
                 </div>
